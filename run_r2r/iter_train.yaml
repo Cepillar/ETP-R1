@@ -1,0 +1,127 @@
+BASE_TASK_CONFIG_PATH: run_r2r/r2r_vlnce.yaml
+SIMULATOR_GPU_IDS: [0]
+TORCH_GPU_ID: 0
+TORCH_GPU_IDS: [0]
+
+TRAINER_NAME: SS-ETP-R1
+ENV_NAME: R1Env
+
+GPU_NUMBERS: 1
+NUM_ENVIRONMENTS: 1
+TENSORBOARD_DIR: data/logs/tensorboard_dirs/
+CHECKPOINT_FOLDER: data/logs/checkpoints/
+RESULTS_DIR: data/logs/checkpoints/
+ONLY_LAST_SAVEALL: True
+# VIDEO_DIR: data/logs/video/
+# VIDEO_OPTION: ["disk"]
+
+INFERENCE:
+  SPLIT: test
+  USE_CKPT_CONFIG: False
+  SAMPLE: False
+  CKPT_PATH: '' # REPLACE THIS
+  PREDICTIONS_FILE: ''
+  FORMAT: r2r
+  EPISODE_COUNT: -1
+
+EVAL:
+  USE_CKPT_CONFIG: False
+  # SPLIT: train_split_1goal
+  SPLIT: val_unseen
+  EPISODE_COUNT: -1
+  # EPISODE_ID: ['1159']
+  # EPISODE_ID: ['53', '145', '433', '467', '512', '666', '698', '750', '901', '1011', '1232', '1369', '1472', '1559', '1623', '1798', '1800']
+  # 0.29(split model split set)
+  # EPISODE_ID: ['1136', '1440', '963', '1614', '251', '303', '1720', '828', '476', '715', '546', '1110', '415', '1100', '440', '52', '968']
+  # EPISODE_ID: ['1110']
+  # 0.51(split model split set)
+  # EPISODE_ID: ['53', '1685', '821', '1024', '1477', '1636', '675', '164', '1375', '1679', '250', '2', '475', '1356', '252', '1439', '1016', '1285', '1478', '25', '1109', '961', '516', '14', '385', '744', '447', '156', '1196', '1692', '302', '1263', '86']
+  # 0.20(split model split set)
+  # EPISODE_ID: ['88', '345', '463', '1324', '321', '849', '312', '723', '1058', '1764']
+
+  # EPISODE_ID: ['14', '35', '98', '157', '221', '289', '367', '411', '488', '554', '601', '676', '732', '803', '864', '923', '987', '1045', '1121', '1199', '1267', '1331', '1405', '1478', '1533', '1598', '1655', '1712', '1777', '1823', '25', '111', '189', '243', '312', '398', '444', '521', '599', '665', '723', '798', '855', '910', '978', '1064', '1143', '1222', '1288', '1354', '1421', '1499', '1555', '1611', '1678', '1734', '1799', '1815', '49', '133', '210', '276', '345', '421', '476', '543', '621', '698', '755', '812', '3', '75', '121', '198', '254', '301', '333', '458', '512', '589', '642', '711', '789', '834', '902', '965', '1023', '1101', '1178', '1245', '1300', '1387', '1452', '1509', '1576', '1634', '1699', '1753', '1801', '1838']
+  EPISODE_ID: None
+  CKPT_PATH_DIR: ''
+  fast_eval: False
+
+
+IL:
+  iters: 15000
+  log_every: 200
+  lr: 1e-5
+  batch_size: 1 # equal to NUM_ENVIRONMENTS
+  ml_weight: 1.0
+  expert_policy: spl
+
+  sample_ratio: 0.75
+  decay_interval: 3000
+  warmup_iters: 1000
+  min_lr_ratio: 0.1
+  
+  max_traj_len: 15
+  max_text_len: 150
+  loc_noise: 0.5
+  waypoint_aug: False
+  ghost_aug: 0.0
+  back_algo: teleport
+  # back_algo: control
+  tryout: True
+  ckpt_to_load: "data/checkpoints/ckpt.0.pth"
+
+GRPO:
+  iters: 5000
+  log_every: 25
+  lr: 1e-5
+  batch_size: 1 # equal to NUM_ENVIRONMENTS
+  
+  max_traj_len: 15
+  max_text_len: 150
+  loc_noise: 0.5
+  waypoint_aug: False
+  ghost_aug: 0.0
+  back_algo: teleport
+  # back_algo: control
+  tryout: True
+  ckpt_to_load: "data/checkpoints/ckpt.0.pth"
+
+  warmup_iters: 1000
+  min_lr_ratio: 0.1
+
+  sample_num: 8
+  grpo_epsilon: 0.2
+  grpo_beta: 0.01
+  max_grad_norm: 1.0
+  update_epochs: 4
+  dropout_rate: 0.1
+  train_all: False
+  enable_amp: False
+  enable_all_dropouts: False
+  dropout_in_sampling: False
+
+  T_start: 2.0
+  T_end: 1.0
+
+MODEL:
+  task_type: r2r
+  policy_name: R1Policy
+
+  NUM_ANGLES: 12
+  pretrained_path: pretrained/ETP/mlm.sap_r2r/ckpts/model_step_82500.pt
+  fix_lang_embedding: False
+  fix_pano_embedding: False
+  use_depth_embedding: True
+  use_sprels: True
+  merge_ghost: True
+  consume_ghost: True
+  
+  spatial_output: False
+  RGB_ENCODER:
+    output_size: 512
+  DEPTH_ENCODER:
+    output_size: 256    
+  VISUAL_DIM:
+    vis_hidden: 768
+    directional: 128
+  INSTRUCTION_ENCODER:
+    bidirectional: True
+

@@ -1,0 +1,55 @@
+{
+    "model_config": "",
+    "checkpoint": null,
+    "output_dir": "",
+    "mrc_mask_prob": 0.15,
+    "max_txt_len": 250,
+    "train_batch_size": 32,
+    "val_batch_size": 32,
+    "val_sample_num": 5000,
+    "gradient_accumulation_steps": 1,
+    "learning_rate": 5e-05,
+    "valid_steps": 2500,
+    "log_steps": 2500,
+    "num_train_steps": 500000,
+    "optim": "adamw",
+    "betas": [
+        0.9,
+        0.98
+    ],
+    "dropout": 0.1,
+    "weight_decay": 0.01,
+    "grad_norm": 5.0,
+    "warmup_steps": 20000,
+    "seed": 0,
+    "fp16": false,
+    "n_workers": 1,
+    "pin_mem": true,
+    "init_pretrained": "roberta",
+
+    "train_datasets": {
+        "R2R": {
+            "name": "R2R",
+            "train_traj_files": ["pretrain_src/datasets/R2R/annotations/pretrain_R2R_RxR/R2R_train_enc_xlmr.jsonl",
+                                "pretrain_src/datasets/R2R/annotations/pretrain_R2R_RxR/R2R_Prevalent_enc_xlmr.jsonl",
+                                "pretrain_src/datasets/R2R/annotations/pretrain_R2R_RxR/R2R_Prevalent_gemini_aug_enc_xlmr.jsonl",
+                                "pretrain_src/datasets/R2R/annotations/pretrain_R2R_RxR/rxr_train_guide_xlmr.jsonl",
+                                "pretrain_src/datasets/R2R/annotations/pretrain_R2R_RxR/rxr_marky_enc_xlmr.jsonl"],
+            "val_unseen_r2r_traj_files": ["pretrain_src/datasets/R2R/annotations/pretrain_R2R_RxR/R2R_val_unseen_enc_xlmr.jsonl"],
+            "val_unseen_rxr_traj_files": ["pretrain_src/datasets/R2R/annotations/pretrain_R2R_RxR/rxr_val_unseen_guide_xlmr.jsonl"],
+            "connectivity_dir": "pretrain_src/datasets/R2R/connectivity",
+            "img_ft_file": "pretrain_src/img_features/CLIP-ViT-B-32-views-habitat.hdf5",
+            "dep_ft_file": "pretrain_src/img_features/ddppo_resnet50_depth_features.hdf5",
+            "scanvp_cands_file": "pretrain_src/datasets/R2R/annotations/scanvp_candview_relangles.json",
+            "tasks": ["mlm", "sap"],
+            "mix_ratio": {
+                "-1": [1.0, 1.0],
+                "100000": [1.0, 1.0],
+                "400000": [1.0, 1.0]},
+            "val_tasks": [
+                "mlm",
+                "sap"
+            ]
+        }
+    }
+}

@@ -1,0 +1,21 @@
+.ftpignore
+.ftpconfig
+.vscode
+
+# Byte-compiled / optimized / DLL files
+.ipynb_checkpoints/
+__pycache__/
+*.py[cod]
+*$py.class
+*.swp
+*.zip
+# *.bash
+/data
+/logs
+/pretrained
+/interact
+/pretrain_src/datasets
+/pretrain_src/img_features
+/bert-base-uncased
+*.bin
+/extra_files
