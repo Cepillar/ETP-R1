@@ -192,7 +192,7 @@ Thanks for their great works!
 
 ## Citation
 
-If you find this work or our dataset useful for your research, please cite our paper:
+If you find this work useful for your research, please cite our paper:
 
 ```bibtex
 @article{ye2025etpr1,
