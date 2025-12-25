@@ -3,6 +3,8 @@
 
 # ETP-R1: Evolving Topological Planning with Reinforcement Fine-tuning for Vision-Language Navigation in Continuous Environments
 
+[![arXiv](https://img.shields.io/badge/arXiv-2512.20940-b31b1b.svg)](https://arxiv.org/abs/2512.20940)
+
 This repository is the official implementation of the paper **"ETP-R1: Evolving Topological Planning with Reinforcement Fine-tuning for Vision-Language Navigation in Continuous Environments"**.
 
 ## Introduction
@@ -186,3 +188,16 @@ CUDA_VISIBLE_DEVICES=0,1,2,3 bash run_rxr/main_server.bash eval 2333
 
 Our implementations are partially inspired by [**ETPNav**](https://github.com/MarSaKi/ETPNav).
 Thanks for their great works!
+
+
+## Citation
+
+If you find this work or our dataset useful for your research, please cite our paper:
+
+```bibtex
+@article{ye2025etpr1,
+  title={ETP-R1: Evolving Topological Planning with Reinforcement Fine-tuning for Vision-Language Navigation in Continuous Environments},
+  author={Ye, Shuhao and Mao, Sitong and Cui, Yuxiang and Yu, Xuan and Zhai, Shichao and Chen, Wen and Zhou, Shunbo and Xiong, Rong and Wang, Yue},
+  journal={arXiv preprint arXiv:2512.20940},
+  year={2025}
+}
